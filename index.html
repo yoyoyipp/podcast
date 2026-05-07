@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Endurance Podcast — Mark Beaumont</title>
+  <meta name="description" content="Conversations with the world's greatest endurance athletes — going deep on mindset, method, and the pursuit of extraordinary.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0D0D0D;
+      --paper: #F0EDE6;
+      --blue:  #2B2BFF;
+      --white: #FFFFFF;
+      --mid:   #888;
+      --light: #E0DDD6;
+      --r:     16px;
+      --f:     'Plus Jakarta Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--f);
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 clamp(20px, 5vw, 72px);
+      height: 60px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .nav-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1.5px solid var(--light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      transition: background .18s, border-color .18s, color .18s;
+      white-space: nowrap;
+    }
+
+    .nav-pill svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .nav-pill:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+
+    @media (max-width: 600px) {
+      .nav-pill span { display: none; }
+      .nav-pill { padding: 8px 10px; }
+    }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: var(--ink);
+      color: var(--white);
+      padding: clamp(60px, 10vw, 120px) clamp(20px, 6vw, 80px);
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6vw, 80px);
+      font-weight: 800;
+      line-height: .92;
+      letter-spacing: -.04em;
+    }
+
+    .hero-desc {
+      font-size: clamp(14px, 1.5vw, 16px);
+      line-height: 1.75;
+      color: rgba(255,255,255,.55);
+      margin-top: 20px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,.25);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,.8);
+      transition: background .18s, border-color .18s, color .18s;
+    }
+
+    .hero-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .hero-pill:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.5);
+      color: var(--white);
+    }
+
+    .hero-art {
+      width: clamp(160px, 20vw, 260px);
+      height: clamp(160px, 20vw, 260px);
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 24px 64px rgba(0,0,0,.7);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 760px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-art { width: 120px; height: 120px; border-radius: 14px; order: -1; }
+    }
+
+    /* ── SECTION SHELL ───────────────────────────────────────── */
+    .section {
+      padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 80px);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      margin-bottom: 32px;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    .about-section { background: var(--paper); }
+
+    .about-inner {
+      max-width: 720px;
+    }
+
+    .about-body {
+      font-size: clamp(14px, 1.5vw, 15px);
+      line-height: 1.85;
+      color: #555;
+    }
+
+    .about-body p + p { margin-top: 14px; }
+
+    .about-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .about-links .nav-pill {
+      border-color: rgba(0,0,0,.15);
+      font-size: 11px;
+    }
+
+    /* Host card — compact, matches reference site style */
+    .host-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .host-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--white);
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+      flex-shrink: 0;
+    }
+
+    .host-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .host-text {}
+
+    .host-role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .host-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .host-bio {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #666;
+    }
+
+    /* ── EPISODES ────────────────────────────────────────────── */
+    .ep-list {
+      border-top: 1px solid var(--light);
+    }
+
+    .ep-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light);
+      text-decoration: none;
+      color: var(--ink);
+      transition: background .15s;
+    }
+
+    .ep-row:hover { color: var(--blue); }
+
+    .ep-row:hover .ep-arr { color: var(--blue); transform: translateX(3px); }
+
+    .ep-left { flex: 1; min-width: 0; }
+
+    .ep-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -.01em;
+    }
+
+    .ep-summary {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--mid);
+      margin-top: 4px;
+    }
+
+    .ep-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .ep-dur {
+      font-size: 11px;
+      font-weight: 600;
+      color: #bbb;
+      white-space: nowrap;
+    }
+
+    .ep-arr {
+      color: #ddd;
+      flex-shrink: 0;
+      transition: transform .18s, color .18s;
+      line-height: 1;
+    }
+
+    /* ── SPONSORS ────────────────────────────────────────────── */
+    .sponsors-section {
+      background: var(--white);
+      border-top: 1px solid var(--light);
+      border-bottom: 1px solid var(--light);
+    }
+
+    .sponsors-inner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .sp-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #bbb;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sp-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sp-badge {
+      padding: 6px 16px;
+      background: var(--paper);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: .02em;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.45);
+      padding: 36px clamp(20px, 6vw, 80px);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .footer-brand {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -.01em;
+    }
+
+    .footer-copy { font-size: 11px; }
+
+    .footer-back {
+      font-size: 11px;
+      color: rgba(255,255,255,.35);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .footer-back:hover { color: var(--white); }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,.14);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,.55);
+      transition: background .18s, border-color .18s, color .18s;
+    }
+
+    .footer-pill svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    .footer-pill:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.28);
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="images/ab67656300005f1fb3b041ec281711764d07ce7e.jpg" alt="The Endurance Podcast">
+    <span class="nav-name">The Endurance Podcast</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-pill" href="https://youtube.com/playlist?list=PLZAm04fy9xotSSluuDpMpptqFm16c1RmX&si=255hVJ6BjLs8xpwq" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+      <span>YouTube</span>
+    </a>
+    <a class="nav-pill" href="https://open.spotify.com/show/1npa2DZ7jAeagEfazPGZWb" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      <span>Spotify</span>
+    </a>
+    <a class="nav-pill" href="https://podcasts.apple.com/us/podcast/endurance/id1867197295" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.28 0 4.32.9 5.82 2.34l-1.44 1.44A5.85 5.85 0 0 0 12 6.5c-3.04 0-5.5 2.46-5.5 5.5s2.46 5.5 5.5 5.5 5.5-2.46 5.5-5.5H19.5c0 4.14-3.36 7.5-7.5 7.5S4.5 16.14 4.5 12 7.86 4.5 12 4.5zm0 3a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+      <span>Apple</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-bg" src="images/Slide 4.JPG" alt="">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-kicker">Hosted by Mark Beaumont</span>
+      <h1 class="hero-title">The Endurance<br>Podcast</h1>
+      <p class="hero-desc">Conversations with the world's greatest endurance athletes — going deep on mindset, method, and the pursuit of extraordinary.</p>
+      <div class="hero-actions">
+        <a class="hero-pill" href="https://youtube.com/playlist?list=PLZAm04fy9xotSSluuDpMpptqFm16c1RmX&si=255hVJ6BjLs8xpwq" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          YouTube
+        </a>
+        <a class="hero-pill" href="https://open.spotify.com/show/1npa2DZ7jAeagEfazPGZWb" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify
+        </a>
+        <a class="hero-pill" href="https://podcasts.apple.com/us/podcast/endurance/id1867197295" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.28 0 4.32.9 5.82 2.34l-1.44 1.44A5.85 5.85 0 0 0 12 6.5c-3.04 0-5.5 2.46-5.5 5.5s2.46 5.5 5.5 5.5 5.5-2.46 5.5-5.5H19.5c0 4.14-3.36 7.5-7.5 7.5S4.5 16.14 4.5 12 7.86 4.5 12 4.5zm0 3a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+          Apple Podcasts
+        </a>
+      </div>
+    </div>
+    <img class="hero-art" src="images/ab67656300005f1fb3b041ec281711764d07ce7e.jpg" alt="The Endurance Podcast">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div>
+        <span class="section-label">About the podcast</span>
+        <h2 class="section-heading">Conversations that go<br>the extra mile</h2>
+        <div class="about-body">
+          <p>The Endurance Podcast goes deep with the world's greatest endurance athletes — explorers, cyclists, swimmers, climbers, and ultra-runners who have pushed human performance to its absolute limits.</p>
+          <p>Each conversation digs into the mindset behind extraordinary achievement: how elite performers train, suffer, recover, and keep going when every instinct says stop. Honest, unfiltered conversations about the pursuit of the extraordinary.</p>
+          <p>New episodes drop regularly on YouTube, Spotify, and Apple Podcasts. Subscribe so you never miss one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODES -->
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label">All Episodes</span>
+    <h2 class="section-heading">Latest conversations</h2>
+    <div class="ep-list">
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=f9oA_M0xwBU" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Shaunna Burke PhD — Dying to Climb</div>
+          <div class="ep-summary">A sports scientist and elite mountaineer on the psychology and physiology of pushing the human body to its limits at altitude.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">56:18</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=_IFjhaqP14M" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Neil Laughton — Flying cars and World Records</div>
+          <div class="ep-summary">Adventurer, entrepreneur, and record-breaker on the drive to innovate, a life lived at the edge, and the future of personal flight.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">46:12</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=9zDwOj-WVOM" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Around Britain — Guinness World Record</div>
+          <div class="ep-summary">The full story behind the record-breaking circumnavigation of Britain by bike — the preparation, the pain, and what it takes to go all the way round.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">49:30</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=SnQ5puhGaro" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Josh Ibbett — The voice of gravel racing</div>
+          <div class="ep-summary">Transcontinental Race veteran and ultra-endurance cyclist on the booming gravel scene, self-supported racing, and what makes it different.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">37:54</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=qR-y9p--X98" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Amy Ennion — Endurance swimming records</div>
+          <div class="ep-summary">Open water swimmer on breaking records in cold, open seas — the mental resilience, training discipline, and the strange pull of extreme distance swimming.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">55:15</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=ajZXVMmmg2Q" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Rob Wainwright — Going the extra mile for Doddie Weir</div>
+          <div class="ep-summary">Former Scotland rugby captain on stepping outside his comfort zone to take on charitable ultra-challenges in memory of his great friend Doddie Weir.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">46:08</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=v_TACa4C5os" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Sarah Ruggins — LEJOGLE, Europe, the World?</div>
+          <div class="ep-summary">Ultra-cyclist on completing Land's End to John o'Groats and the relentless ambition to keep pushing the distance further — across Europe and beyond.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">1:03:13</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=KHwP17OHMgM" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Jamie Ramsay — 54,000km and counting</div>
+          <div class="ep-summary">Solo adventurer who has run and cycled across multiple continents on the mindset, logistics, and loneliness of long-distance solo missions.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">52:55</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=zLtCbwx7dHI" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Eilidh Price — The power of being underestimated</div>
+          <div class="ep-summary">Scottish adventure racer on consistent daily effort, underdog mentality, and why being overlooked can be the most powerful fuel of all.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">53:25</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=DSq5wqZXhPk" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Duncan Covey — Pedalling the planet</div>
+          <div class="ep-summary">Long-distance cyclist on the physical and mental journey of global bike touring — solitude, suffering, and the strange freedom of the open road.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">43:46</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=lgO8NOzQ-Sg" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Luca Kuhn — Building a community and a brand</div>
+          <div class="ep-summary">Ultra-athlete and entrepreneur on what it takes to build a credible endurance brand from the ground up, and how community changes everything.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">44:29</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=S7ucUbLPPUg" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Kenton Cool — 19 Everest summits and counting</div>
+          <div class="ep-summary">Britain's most experienced high-altitude mountaineer on what keeps drawing him back to Everest, managing risk, and the psychology of extreme altitude.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">48:28</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=0NqH4rpUZOA" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Helen Rennard — Winter Record of the Munros</div>
+          <div class="ep-summary">Scottish mountain runner on setting a winter speed record across all of Scotland's Munros — planning, bad weather, and keeping going through the dark.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">49:35</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=n5_Ia6d1ud4" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Jack Carlin — GB Track Sprinter &amp; Olympian</div>
+          <div class="ep-summary">Olympic track cyclist on the intensity of velodrome racing, the British Cycling elite programme, and what it takes to compete at the highest level.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">1:08:28</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=6BIdoV6kOMs" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Renee McGregor — Sports Dietician &amp; Ultra Runner</div>
+          <div class="ep-summary">Leading performance nutritionist on the science of fuelling endurance athletes, common mistakes, and her own journey into ultra-distance running.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">55:50</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=RRaaMS0Mbyc" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Sean Conway — 105 Ironman</div>
+          <div class="ep-summary">Record-breaking multi-sport adventurer who completed 105 back-to-back Ironman triathlons on extreme persistence, physical breakdown, and not stopping.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">56:45</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+      <a class="ep-row" href="https://www.youtube.com/watch?v=nGmtYHP30Os" target="_blank" rel="noopener">
+        <div class="ep-left">
+          <div class="ep-title">Jenny Graham — World Record Endurance Cyclist</div>
+          <div class="ep-summary">The woman who cycled around the world faster than any woman in history on breaking boundaries, solo suffering, and what comes after the finish line.</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">55:37</span>
+          <span class="ep-arr">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section class="section about-section">
+  <div class="section-inner">
+    <span class="section-label">Host</span>
+    <div class="host-card">
+      <div class="host-meta">
+        <img class="host-photo" src="images/1768933307293.png" alt="Mark Beaumont">
+        <div class="host-text">
+          <span class="host-role">Host</span>
+          <div class="host-name">Mark Beaumont</div>
+        </div>
+      </div>
+      <p class="host-bio">Guinness World Record holder, adventurer, and broadcaster. Mark cycled around the world in 78 days and has explored every corner of the globe — now he brings those lessons into honest conversations with the athletes who inspire him most.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section class="section sponsors-section" style="padding-top:28px; padding-bottom:28px;">
+  <div class="section-inner">
+    <div class="sponsors-inner">
+      <span class="sp-label">Supported by</span>
+      <div class="sp-badges">
+        <span class="sp-badge">Move Pre-Workout</span>
+        <span class="sp-badge">Precision Fuel</span>
+        <span class="sp-badge">Garmin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-brand">The Endurance Podcast</span>
+      <span class="footer-copy">© 2026 Mark Beaumont. All rights reserved.</span>
+      <a class="footer-back" href="index.html">← Back to markbeaumont.com</a>
+    </div>
+    <div class="footer-links">
+      <a class="footer-pill" href="https://youtube.com/playlist?list=PLZAm04fy9xotSSluuDpMpptqFm16c1RmX&si=255hVJ6BjLs8xpwq" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        YouTube
+      </a>
+      <a class="footer-pill" href="https://open.spotify.com/show/1npa2DZ7jAeagEfazPGZWb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify
+      </a>
+      <a class="footer-pill" href="https://podcasts.apple.com/us/podcast/endurance/id1867197295" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.28 0 4.32.9 5.82 2.34l-1.44 1.44A5.85 5.85 0 0 0 12 6.5c-3.04 0-5.5 2.46-5.5 5.5s2.46 5.5 5.5 5.5 5.5-2.46 5.5-5.5H19.5c0 4.14-3.36 7.5-7.5 7.5S4.5 16.14 4.5 12 7.86 4.5 12 4.5zm0 3a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+        Apple Podcasts
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
